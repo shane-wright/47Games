@@ -73,15 +73,12 @@ public class EnvListActivity extends Activity {
     this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
     // Getting the user sound settings
     AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
-    float actualVolume = (float) audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-    float maxVolume = (float) audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-    float volume = actualVolume / maxVolume;
 
 
     int soundID = sp.load(context, sounds[0], 1);
     MyItemClickListener click = new MyItemClickListener();
-    click.setVolume(volume);
     click.giveSoundPool(sp);
+    click.giveAudioManager(audioManager);
     click.setContext(context);
     main.setOnItemClickListener(click);
   }
