@@ -10,6 +10,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+     <com.google.ads.AdView 
+      android:id="@+id/adView"
+      android:layout_width="match_parent"
+      android:layout_height="75px"
+      ads:adUnitId="a15127843908af3"
+      ads:adSize="BANNER"
+      ads:testDevices="TEST_EMULATOR, emulator-5554"
+      ads:loadAdOnCreate="true"/>
     <TabWidget
       android:id="@android:id/tabs"
       android:layout_width="match_parent"
@@ -19,13 +27,5 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:padding="5dp" />
-     <com.google.ads.AdView 
-      android:id="@+id/adView"
-      android:layout_width="480px"
-      android:layout_height="75px"
-      ads:adUnitId="a15127843908af3"
-      ads:adSize="BANNER"
-      ads:testDevices="TEST_EMULATOR, emulator-5554"
-      ads:loadAdOnCreate="true"/>
   </LinearLayout>
 </TabHost>
