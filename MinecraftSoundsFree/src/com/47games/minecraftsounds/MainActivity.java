@@ -34,7 +34,7 @@ public class MainActivity extends TabActivity {
     tabHost.addTab(tabSpecMob);
     tabHost.addTab(tabSpecEnv);
  
-    //set Windows tab as default (zero based)
+    //set Mobs tab as default (zero based)
     tabHost.setCurrentTab(0);
   }
  
