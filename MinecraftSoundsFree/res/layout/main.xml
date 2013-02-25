@@ -19,5 +19,13 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:padding="5dp" />
+     <com.google.ads.AdView 
+      android:id="@+id/adView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      ads:adUnitId="a15127843908af3"
+      ads:adSize="BANNER"
+      ads:testDevices="TEST_EMULATOR, emulator-5554"
+      ads:loadAdOnCreate="true"/>
   </LinearLayout>
 </TabHost>
