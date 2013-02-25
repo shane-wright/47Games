@@ -15,10 +15,12 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
 import android.widget.Toast;
+import com.google.ads.*;
 
 public class MobListActivity extends Activity {
   Context context = this;
   final SoundPool sp = new SoundPool(21, AudioManager.STREAM_MUSIC, 0);
+  private AdView adView;
   int[] sounds = {
     R.raw.mob_bat, 
     R.raw.mob_blaze,
@@ -76,8 +78,12 @@ public class MobListActivity extends Activity {
     adapt.giveSoundIds(sounds);
     adapt.giveSoundPool(sp);
     main.setAdapter(adapt);
-
-
+/*
+    adView = new AdView(this, AdSize.BANNER, "a15127843908af3");
+    LinearLayout line = (LinearLayout) findViewById(R.id.mob_linear);
+    line.addView(adView);
+    adView.loadAd(new AdRequest());
+*/
     this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
     // Getting the user sound settings
     AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
