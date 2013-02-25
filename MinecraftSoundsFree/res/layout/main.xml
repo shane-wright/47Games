@@ -3,27 +3,26 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
   android:id="@android:id/tabhost"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
   android:background="@drawable/back_repeat">
   <LinearLayout
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:padding="5dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TabWidget
       android:id="@android:id/tabs"
-      android:layout_width="fill_parent"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content" />
     <FrameLayout
       android:id="@android:id/tabcontent"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
       android:padding="5dp" />
     <com.google.ads.AdView
       android:id="@+id/adView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="480px"
+      android:layout_height="75px"
       ads:adUnitId="a15127843908af3"
       ads:adSize="BANNER"
       ads:testDevices="emulator-5554"
