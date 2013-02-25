@@ -28,5 +28,10 @@
     <activity 
       android:name="MusicListActivity"
       android:label="@string/app_name"/>
+    <activity 
+      android:name="com.google.ads.AdActivity"
+      android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
   </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 </manifest> 
