@@ -13,10 +13,10 @@
      <com.google.ads.AdView 
       android:id="@+id/adView"
       android:layout_width="match_parent"
-      android:layout_height="75px"
+      android:layout_height="wrap_content"
+      android:background="#000000"
       ads:adUnitId="a15127843908af3"
       ads:adSize="BANNER"
-      ads:testDevices="TEST_EMULATOR, emulator-5554"
       ads:loadAdOnCreate="true"/>
     <TabWidget
       android:id="@android:id/tabs"
