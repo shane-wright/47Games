@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.content.Context;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Button;
 import android.view.ViewGroup.LayoutParams;
 import android.media.AudioManager;
-import android.media.SoundPool;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,70 +21,54 @@ import android.widget.Toast;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 
-public class EnvListActivity extends Activity {
+public class MusicListActivity extends Activity {
   Context context = this;
-  final SoundPool sp = new SoundPool(25, AudioManager.STREAM_MUSIC, 0);
   int[] sounds = {
-    R.raw.env_chest_open,
-    R.raw.env_cloth,
-    R.raw.env_door,
-    R.raw.env_fire,
-    R.raw.env_firework_launch,
-    R.raw.env_glass,
-    R.raw.env_grass,
-    R.raw.env_gravel,
-    R.raw.env_lava,
-    R.raw.env_minecart,
-    R.raw.env_piston,
-    R.raw.env_portal,
-    R.raw.env_sand,
-    R.raw.env_snow,
-    R.raw.env_stone,
-    R.raw.env_tnt,
-    R.raw.env_water,
-    R.raw.env_wood
+    R.raw.music_blocks,
+    R.raw.music_cat,
+    R.raw.music_chirp,
+    R.raw.music_eleven,
+    R.raw.music_far,
+    R.raw.music_mall,
+    R.raw.music_mellohi,
+    R.raw.music_stal,
+    R.raw.music_strad,
+    R.raw.music_thirteen,
+    R.raw.music_ward,
+    R.raw.music_wait
   };
-  Integer[] images = {
-    R.drawable.env_chest,
-    R.drawable.env_cloth,
-    R.drawable.env_door,
-    R.drawable.env_fire,
-    R.drawable.env_firework,
-    R.drawable.env_glass,
-    R.drawable.env_grass,
-    R.drawable.env_gravel,
-    R.drawable.env_lava,
-    R.drawable.env_minecart,
-    R.drawable.env_piston,
-    R.drawable.env_portal,
-    R.drawable.env_sand,
-    R.drawable.env_snow,
-    R.drawable.env_stone,
-    R.drawable.env_tnt,
-    R.drawable.env_water,
-    R.drawable.env_wood
+  public static Integer[] images = {
+    R.drawable.music_blocks,
+    R.drawable.music_cat,
+    R.drawable.music_chirp,
+    R.drawable.music_eleven,
+    R.drawable.music_far,
+    R.drawable.music_mall,
+    R.drawable.music_mellohi,
+    R.drawable.music_stal,
+    R.drawable.music_strad,
+    R.drawable.music_thirteen,
+    R.drawable.music_ward,
+    R.drawable.music_wait
   };
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.env);
-    GridView main = (GridView) findViewById(R.id.env_grid);
-    ImageAdapter adapt = new ImageAdapter(context);
+    setContentView(R.layout.music);
+    GridView main = (GridView) findViewById(R.id.music_grid);
+    MpImageAdapter adapt = new MpImageAdapter(context);
     registerForContextMenu(main);
     adapt.giveImageIds(images);
     adapt.giveSoundIds(sounds);
-    adapt.giveSoundPool(sp);
     main.setAdapter(adapt);
-
-
+    
     this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
     // Getting the user sound settings
     AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
 
 
-    int soundID = sp.load(context, sounds[0], 1);
-    MyItemClickListener click = new MyItemClickListener();
-    click.giveSoundPool(sp);
+    MyMpItemClickListener click = new MyMpItemClickListener();
     click.giveAudioManager(audioManager);
     click.setContext(context);
     main.setOnItemClickListener(click);
@@ -92,8 +76,19 @@ public class EnvListActivity extends Activity {
 
   @Override
   public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    super.onCreateContextMenu(menu, v, menuInfo);
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.layout.context_menu, menu);
+  }
+
+  @Override
+  public boolean onContextItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_set_ringtone:
+        return true;
+      default:
+        return super.onContextItemSelected(item);
+    }
   }
 
 /*
@@ -109,15 +104,15 @@ public class EnvListActivity extends Activity {
 
     switch (item.getItemId()) {
     case R.id.menu_about:
-      Toast.makeText(context, "About was Selected, env", Toast.LENGTH_SHORT).show();
+      Toast.makeText(context, "About was Selected, music", Toast.LENGTH_SHORT).show();
       return true;
 
     case R.id.menu_help:
-      Toast.makeText(context, "Help was Selected, env", Toast.LENGTH_SHORT).show();
+      Toast.makeText(context, "Help was Selected, music", Toast.LENGTH_SHORT).show();
       return true;
 
     case R.id.menu_report_bug:
-      Toast.makeText(context, "Report a bug was Selected, env", Toast.LENGTH_SHORT).show();
+      Toast.makeText(context, "Report a bug was Selected, music", Toast.LENGTH_SHORT).show();
       return true;
 
     default:
