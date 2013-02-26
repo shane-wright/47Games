@@ -14,6 +14,10 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
 import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuInflater;
+import android.widget.Toast;
 
 public class MusicListActivity extends Activity {
   Context context = this;
@@ -65,5 +69,33 @@ public class MusicListActivity extends Activity {
     click.giveAudioManager(audioManager);
     click.setContext(context);
     main.setOnItemClickListener(click);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) { 
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.layout.menu, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+
+    switch (item.getItemId()) {
+    case R.id.menu_about:
+      Toast.makeText(context, "About was Selected, music", Toast.LENGTH_SHORT).show();
+      return true;
+
+    case R.id.menu_help:
+      Toast.makeText(context, "Help was Selected, music", Toast.LENGTH_SHORT).show();
+      return true;
+
+    case R.id.menu_report_bug:
+      Toast.makeText(context, "Report a bug was Selected, music", Toast.LENGTH_SHORT).show();
+      return true;
+
+    default:
+      return super.onOptionsItemSelected(item);
+    }
   }
 }

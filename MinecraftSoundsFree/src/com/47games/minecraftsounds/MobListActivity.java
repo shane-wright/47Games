@@ -16,6 +16,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
 import android.widget.Toast;
 import com.google.ads.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuInflater;
+import android.widget.Toast;
 
 public class MobListActivity extends Activity {
   Context context = this;
@@ -90,5 +94,33 @@ public class MobListActivity extends Activity {
     click.giveAudioManager(audioManager);
     click.setContext(context);
     main.setOnItemClickListener(click);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) { 
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.layout.menu, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+
+    switch (item.getItemId()) {
+    case R.id.menu_about:
+      Toast.makeText(context, "About was Selected, mobs", Toast.LENGTH_SHORT).show();
+      return true;
+
+    case R.id.menu_help:
+      Toast.makeText(context, "Help was Selected, mobs", Toast.LENGTH_SHORT).show();
+      return true;
+
+    case R.id.menu_report_bug:
+      Toast.makeText(context, "Report a bug was Selected, mobs", Toast.LENGTH_SHORT).show();
+      return true;
+
+    default:
+      return super.onOptionsItemSelected(item);
+    }
   }
 }

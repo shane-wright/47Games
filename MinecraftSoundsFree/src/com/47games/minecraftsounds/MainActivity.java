@@ -6,7 +6,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
- 
+
 public class MainActivity extends TabActivity {
  
   public void onCreate(Bundle savedInstanceState) {
@@ -45,5 +45,4 @@ public class MainActivity extends TabActivity {
     //set Mobs tab as default (zero based)
     tabHost.setCurrentTab(0);
   }
- 
 }
