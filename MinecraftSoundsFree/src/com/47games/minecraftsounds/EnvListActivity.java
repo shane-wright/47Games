@@ -18,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.widget.Toast;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 
 public class EnvListActivity extends Activity {
   Context context = this;
@@ -68,6 +70,7 @@ public class EnvListActivity extends Activity {
     setContentView(R.layout.env);
     GridView main = (GridView) findViewById(R.id.env_grid);
     ImageAdapter adapt = new ImageAdapter(context);
+    registerForContextMenu(main);
     adapt.giveImageIds(images);
     adapt.giveSoundIds(sounds);
     adapt.giveSoundPool(sp);
@@ -87,6 +90,13 @@ public class EnvListActivity extends Activity {
     main.setOnItemClickListener(click);
   }
 
+  @Override
+  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.layout.context_menu, menu);
+  }
+
+/*
   @Override
   public boolean onCreateOptionsMenu(Menu menu) { 
     MenuInflater inflater = getMenuInflater();
@@ -113,5 +123,5 @@ public class EnvListActivity extends Activity {
     default:
       return super.onOptionsItemSelected(item);
     }
-  }
+  }*/
 }

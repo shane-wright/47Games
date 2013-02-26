@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.content.Context;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.Button;
 import android.view.ViewGroup.LayoutParams;
 import android.media.AudioManager;
@@ -15,16 +14,16 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
 import android.widget.Toast;
-import com.google.ads.*;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.widget.Toast;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 
 public class MobListActivity extends Activity {
   Context context = this;
   final SoundPool sp = new SoundPool(21, AudioManager.STREAM_MUSIC, 0);
-  private AdView adView;
   int[] sounds = {
     R.raw.mob_bat, 
     R.raw.mob_blaze,
@@ -78,6 +77,7 @@ public class MobListActivity extends Activity {
     setContentView(R.layout.mobs);
     GridView main = (GridView) findViewById(R.id.mob_grid);
     ImageAdapter adapt = new ImageAdapter(context);
+    registerForContextMenu(main);
     adapt.giveImageIds(images);
     adapt.giveSoundIds(sounds);
     adapt.giveSoundPool(sp);
@@ -96,6 +96,13 @@ public class MobListActivity extends Activity {
     main.setOnItemClickListener(click);
   }
 
+  @Override
+  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) { 
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.layout.context_menu, menu);
+  }
+
+/*
   @Override
   public boolean onCreateOptionsMenu(Menu menu) { 
     MenuInflater inflater = getMenuInflater();
@@ -122,5 +129,5 @@ public class MobListActivity extends Activity {
     default:
       return super.onOptionsItemSelected(item);
     }
-  }
+  }*/
 }

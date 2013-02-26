@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_set_ringtone"
+          android:title="Set as Ringtone" />
+
+    <item android:id="@+id/menu_set_alarm"
+          android:title="Set as Alarm" />
+
+    <item android:id="@+id/menu_set_notification"
+          android:title="Set as Notification" />
+</menu>

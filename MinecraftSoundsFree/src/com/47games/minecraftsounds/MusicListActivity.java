@@ -18,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.widget.Toast;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 
 public class MusicListActivity extends Activity {
   Context context = this;
@@ -56,6 +58,7 @@ public class MusicListActivity extends Activity {
     setContentView(R.layout.music);
     GridView main = (GridView) findViewById(R.id.music_grid);
     MpImageAdapter adapt = new MpImageAdapter(context);
+    registerForContextMenu(main);
     adapt.giveImageIds(images);
     adapt.giveSoundIds(sounds);
     main.setAdapter(adapt);
@@ -71,6 +74,13 @@ public class MusicListActivity extends Activity {
     main.setOnItemClickListener(click);
   }
 
+  @Override
+  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.layout.context_menu, menu);
+  }
+
+/*
   @Override
   public boolean onCreateOptionsMenu(Menu menu) { 
     MenuInflater inflater = getMenuInflater();
@@ -97,5 +107,5 @@ public class MusicListActivity extends Activity {
     default:
       return super.onOptionsItemSelected(item);
     }
-  }
+  }*/
 }
