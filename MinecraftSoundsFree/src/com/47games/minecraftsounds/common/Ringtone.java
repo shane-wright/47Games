@@ -14,13 +14,17 @@ import android.content.Context;
 import android.media.RingtoneManager;
 import android.view.MenuItem;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.os.Environment;
+import java.lang.NullPointerException;
 
-public class MobRingtone {
+public class Ringtone {
   private MenuItem menuItem;
   private ContentResolver mCr;
   private Context context;
+  private Environment envir;
+  private File newSoundFile;
 
-  public MobRingtone(MenuItem menuItem, ContentResolver mCr, Context context) {
+  public Ringtone(MenuItem menuItem, ContentResolver mCr, Context context) {
     this.menuItem = menuItem;
     this.mCr = mCr;
     this.context = context;
@@ -29,7 +33,11 @@ public class MobRingtone {
   public void setAsRingtone() {
     AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuItem.getMenuInfo();
     int position = info.position;
-    File newSoundFile = new File("/sdcard/media/ringtone", MobListActivity.names[position] + ".oog");
+    try {
+      newSoundFile = new File(context.getExternalFilesDir(envir.DIRECTORY_RINGTONES).toString(), MobListActivity.names[position] + ".oog");
+    } catch (NullPointerException e) {
+      e.printStackTrace();
+    }
     try {
       newSoundFile.createNewFile();
     } catch (IOException e) {

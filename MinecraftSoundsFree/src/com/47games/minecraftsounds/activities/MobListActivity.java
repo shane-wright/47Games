@@ -89,7 +89,7 @@ public class MobListActivity extends Activity {
   public boolean onContextItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_set_ringtone:
-        MobRingtone ring = new MobRingtone(item, getContentResolver(), act);
+        Ringtone ring = new Ringtone(item, getContentResolver(), act);
         ring.setAsRingtone();
         return true;
       default:
