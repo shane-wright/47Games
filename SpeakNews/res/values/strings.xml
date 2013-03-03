@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MainActivity</string>
+    <string name="app_name">Speak News</string>
+    <string name="new_feed">New Feed</string>
+    <string name="edit_feeds">Edit Feeds</string>
+    <string name="pause_button">Pause</string>
+    <string name="restart_button">Restart</string>
+    <string name="delete_feed_button">Delete Feed</string>
+    
 </resources>
