@@ -20,7 +20,7 @@
       </intent-filter>
     </activity>
     <activity 
-      android:name="FeedListActivity"
-      android:label="feed_list_activity_label"/>
+      android:name="FeedViewActivity"
+      android:label="@string/feed_list_activity_label"/>
   </application>
 </manifest> 
