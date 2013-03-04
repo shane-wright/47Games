@@ -6,5 +6,7 @@
     <string name="pause_button">Pause</string>
     <string name="restart_button">Restart</string>
     <string name="delete_feed_button">Delete Feed</string>
+    <string name="rss_list_activity_label">RSS Feeds</string>
+    <string name="feed_list_activity_label">RSS Feed</string>
     
 </resources>
