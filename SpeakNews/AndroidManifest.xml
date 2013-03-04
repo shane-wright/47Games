@@ -23,4 +23,5 @@
       android:name="FeedViewActivity"
       android:label="@string/feed_list_activity_label"/>
   </application>
+  <uses-permission android:name="android.permission.INTERNET" /> 
 </manifest> 
