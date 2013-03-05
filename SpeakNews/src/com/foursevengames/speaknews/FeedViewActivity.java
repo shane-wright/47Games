@@ -21,29 +21,25 @@ import android.net.Uri;
 import org.xmlpull.v1.XmlPullParserException;
 import android.os.AsyncTask;
 import android.content.Context;
+import android.os.Bundle;
 
 public class FeedViewActivity extends ListActivity {
   Context context = this;
   ArrayList headlines = new ArrayList();
   ArrayList links = new ArrayList();
+  Bundle extras = new Bundle();
 
   /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.feed_list);
+    extras = getIntent().getExtras();
     ActionBar actionBar = getActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
-    new RssParser().execute("string");
+    new RssParser().execute(extras.getString("urlString"));
   }
   
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    MenuInflater inflater = getMenuInflater();
-    inflater.inflate(R.menu.feed_list_menu, menu);
-    return true;
-  }
-
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
@@ -61,7 +57,7 @@ public class FeedViewActivity extends ListActivity {
   public class RssParser extends AsyncTask<String, Void, ArrayList> {
     protected ArrayList doInBackground(String... urlString) {
       try {
-        URL url = new URL("http://rss.cnn.com/rss/cnn_topstories.rss");
+        URL url = new URL(urlString[0]);
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         factory.setNamespaceAware(false);
         XmlPullParser xpp = factory.newPullParser();

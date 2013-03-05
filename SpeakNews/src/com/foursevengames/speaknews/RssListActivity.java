@@ -1,6 +1,6 @@
 package com.foursevengames.speaknews;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,13 +12,20 @@ import android.widget.TableRow;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
+import java.util.ArrayList;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class RssListActivity extends Activity {
+public class RssListActivity extends ListActivity {
+  public ArrayList titles = new ArrayList();
+  public ArrayList urlStrings = new ArrayList();
+
   /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.rss_list);
+    getData();
     createRows();
   }
   
@@ -29,33 +36,24 @@ public class RssListActivity extends Activity {
     return true;
   }
 
-  public void onFeedClicked(View view) {
+  @Override
+  protected void onListItemClick(ListView l, View v, int position, long id) {
     Intent intent = new Intent(this, FeedViewActivity.class);
-    //intent.putExtra();
+    intent.putExtra("urlString", urlStrings.get(position).toString());
     startActivity(intent);
   }
 
+  private void getData() {
+    titles.add("CNN");
+    urlStrings.add("http://rss.cnn.com/rss/cnn_topstories.rss");
+    titles.add("FOX");
+    urlStrings.add("http://www.foxnews.com/about/rss/feedburner/foxnews/latest");
+    titles.add("NBA");
+    urlStrings.add("http://www.nba.com/rss/nba_rss.xml");
+  }
+
   private void createRows() {
-    String[] names = { "CNN", "FOX", "NBA" };
-    int[] images = { R.drawable.cnn_icon, R.drawable.fox_icon, R.drawable.nba_icon };
-    TableLayout rssList = (TableLayout) findViewById(R.id.rss_list);
-    int i = 0;
-    for (String name : names) {
-      TableRow row = (TableRow) getLayoutInflater().inflate(R.layout.tablerow_template, null);
-      ImageView view = (ImageView) getLayoutInflater().inflate(R.layout.icon_template, null);
-      view.setImageResource(images[i]);
-      TextView text = (TextView) getLayoutInflater().inflate(R.layout.text_template, null);
-      text.setText(name);
-      row.addView(view);
-      row.addView(text);
-      row.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          onFeedClicked(view);
-        }
-      });
-      rssList.addView(row);
-      i++;
-    }
+    ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titles);
+    setListAdapter(adapter);
   }
 }
