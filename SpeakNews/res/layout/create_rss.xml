@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="12sp">
+  <TextView
+    android:id="@+id/text1_field"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:textSize="18dp"
+    android:textColor="#575757"
+    android:text="Enter RSS Name:"/>
+  <EditText
+    android:id="@+id/edit1_field"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/text1_field"
+    android:textSize="18dp"
+    android:hint="Enter Name Here"/>
+  <TextView
+    android:id="@+id/text3_field"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/edit1_field"
+    android:paddingTop="10sp"
+    android:textSize="18dp"
+    android:textColor="#575757"
+    android:text="Enter RSS URL:"/>
+  <EditText
+    android:id="@+id/edit2_field"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/text3_field"
+    android:textSize="18dp"
+    android:hint="http://"/>
+  <Button
+    android:id="@+id/create_feed_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/edit2_field"
+    android:layout_centerHorizontal="true"
+    android:text="Create Feed"/>
+</RelativeLayout>

@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import java.util.ArrayList;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.view.MenuItem;
 
 public class RssListActivity extends ListActivity {
   public ArrayList titles = new ArrayList();
@@ -26,6 +27,7 @@ public class RssListActivity extends ListActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.rss_list);
     getData();
+    getData2();
     createRows();
   }
   
@@ -36,11 +38,31 @@ public class RssListActivity extends ListActivity {
     return true;
   }
 
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.new_feed_button:
+        Intent intent = new Intent(this, NewFeedActivity.class);
+        startActivity(intent);
+        return true;
+      default:
+        return false;
+    }
+  }
+
   @Override
   protected void onListItemClick(ListView l, View v, int position, long id) {
     Intent intent = new Intent(this, FeedViewActivity.class);
     intent.putExtra("urlString", urlStrings.get(position).toString());
     startActivity(intent);
+  }
+
+  private void getData2() {
+    DatabaseHandler db = new DatabaseHandler(this);
+    ArrayList<Feed> feeds = db.getAllFeeds();
+    for (Feed feed : feeds) {
+      titles.add(feed.getName());
+      urlStrings.add(feed.getRssUrl());
+    }
   }
 
   private void getData() {

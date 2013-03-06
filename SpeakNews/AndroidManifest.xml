@@ -22,6 +22,9 @@
     <activity 
       android:name="FeedViewActivity"
       android:label="@string/feed_list_activity_label"/>
+    <activity 
+      android:name="NewFeedActivity"
+      android:label="New RSS"/>
   </application>
   <uses-permission android:name="android.permission.INTERNET" /> 
 </manifest> 
