@@ -1,12 +1,12 @@
 package com.foursevengames.speaknews;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.view.MenuItem;
 import android.content.Intent;
 
-public class NewFeedActivity extends Activity {
+public class NewFeedActivity extends ListActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

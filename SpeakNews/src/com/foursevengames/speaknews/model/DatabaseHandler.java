@@ -87,6 +87,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
       } while (cursor.moveToNext());
     }
  
+    db.close();
     return feedList;
   }
  

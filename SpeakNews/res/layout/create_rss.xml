@@ -36,10 +36,29 @@
     android:textSize="18dp"
     android:hint="http://"/>
   <Button
+    android:id="@+id/preview_feed_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/edit2_field"
+    android:text="Preview Feed"/>
+  <Button
     android:id="@+id/create_feed_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/edit2_field"
-    android:layout_centerHorizontal="true"
+    android:layout_toRightOf="@id/preview_feed_button"
     android:text="Create Feed"/>
+  <ListView
+    android:id="@android:id/list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+  <TextView 
+    android:id="@android:id/empty"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="RSS Preview"
+    android:textSize="20sp"
+    android:textColor="#a8a8a8"/>
 </RelativeLayout>
