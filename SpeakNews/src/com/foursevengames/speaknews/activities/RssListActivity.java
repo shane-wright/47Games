@@ -54,6 +54,7 @@ public class RssListActivity extends ListActivity {
   protected void onListItemClick(ListView l, View v, int position, long id) {
     Intent intent = new Intent(this, FeedViewActivity.class);
     intent.putExtra("urlString", urlStrings.get(position).toString());
+    intent.putExtra("title", titles.get(position).toString());
     startActivity(intent);
   }
 
@@ -64,12 +65,12 @@ public class RssListActivity extends ListActivity {
       titles.add(feed.getName());
       urlStrings.add(feed.getRssUrl());
     }
-    titles.add("CNN");
+/*    titles.add("CNN");
     urlStrings.add("http://rss.cnn.com/rss/cnn_topstories.rss");
     titles.add("FOX");
     urlStrings.add("http://www.foxnews.com/about/rss/feedburner/foxnews/latest");
     titles.add("NBA");
     urlStrings.add("http://www.nba.com/rss/nba_rss.xml");
-  }
+*/  }
 
 }

@@ -7,4 +7,12 @@
     android:id="@android:id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
+    <TextView 
+      android:id="@android:id/empty"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center"
+      android:text="You don't have any RSS feeds yet\nTo create one, press New Feed"
+      android:textSize="20sp"
+      android:textColor="#a8a8a8"/>
 </RelativeLayout>

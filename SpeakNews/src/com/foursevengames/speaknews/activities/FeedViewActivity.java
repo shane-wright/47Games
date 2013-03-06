@@ -37,6 +37,7 @@ public class FeedViewActivity extends ListActivity {
     extras = getIntent().getExtras();
     ActionBar actionBar = getActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
+    this.setTitle(extras.getString("title"));
     new RssParser().execute(extras.getString("urlString"));
   }
   
