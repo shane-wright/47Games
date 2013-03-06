@@ -64,18 +64,16 @@ public class RssListActivity extends ListActivity {
   @Override
   public boolean onContextItemSelected(MenuItem item) {
     AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-    int position = info.position;
-    String title = (String) titles.get(position);
-    String url = (String) urlStrings.get(position);
+    String title = (String) titles.get(info.position);
+    String url = (String) urlStrings.get(info.position);
     Feed feed = new Feed(title, url);
     DatabaseHandler db = new DatabaseHandler(this);
 
     switch (item.getItemId()) {
       case R.id.delete_rss_feed:
         db.deleteFeed(feed);
-        db.close();
-        adapter.remove(title);
         getData();
+        adapter.remove(title);
         adapter.notifyDataSetChanged();
         return true;
       case R.id.rename_rss_feed:
@@ -96,21 +94,12 @@ public class RssListActivity extends ListActivity {
   private void getData() {
     DatabaseHandler db = new DatabaseHandler(this);
     ArrayList<Feed> feeds = db.getAllFeeds();
-    ArrayList tempTitle = new ArrayList();
-    ArrayList tempUrl = new ArrayList();
 
     for (Feed feed : feeds) {
       titles.clear();
-      urlStrings.clear();
       titles.add(feed.getName());
+      urlStrings.clear();
       urlStrings.add(feed.getRssUrl());
     }
-/*    titles.add("CNN");
-    urlStrings.add("http://rss.cnn.com/rss/cnn_topstories.rss");
-    titles.add("FOX");
-    urlStrings.add("http://www.foxnews.com/about/rss/feedburner/foxnews/latest");
-    titles.add("NBA");
-    urlStrings.add("http://www.nba.com/rss/nba_rss.xml");
-*/  }
-
+  }
 }

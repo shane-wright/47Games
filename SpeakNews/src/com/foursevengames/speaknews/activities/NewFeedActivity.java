@@ -23,6 +23,7 @@ public class NewFeedActivity extends ListActivity {
   ArrayList headlines = new ArrayList();
   ArrayList links = new ArrayList();
   Context context = this;
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

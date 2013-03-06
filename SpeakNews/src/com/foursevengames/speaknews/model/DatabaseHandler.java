@@ -47,8 +47,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
    */
  
   void addFeed(Feed feed) {
-    SQLiteDatabase db = this.getWritableDatabase();
- 
+    SQLiteDatabase db = this.getWritableDatabase(); 
     ContentValues values = new ContentValues();
     values.put(KEY_NAME, feed.getName()); 
     values.put(KEY_URL, feed.getRssUrl()); 
@@ -59,7 +58,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
  
   Feed getFeed(int id) {
     SQLiteDatabase db = this.getReadableDatabase();
- 
     Cursor cursor = db.query(TABLE_FEEDS, new String[] { KEY_ID,KEY_NAME, KEY_URL }, KEY_ID + "=?", new String[] { String.valueOf(id) }, null, null, null, null);
     if (cursor != null) {
       cursor.moveToFirst();
@@ -72,7 +70,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
   public ArrayList<Feed> getAllFeeds() {
     ArrayList<Feed> feedList = new ArrayList<Feed>();
     String selectQuery = "SELECT  * FROM " + TABLE_FEEDS;
- 
     SQLiteDatabase db = this.getWritableDatabase();
     Cursor cursor = db.rawQuery(selectQuery, null);
  
@@ -93,19 +90,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
  
   public int updateFeed(Feed feed) {
     SQLiteDatabase db = this.getWritableDatabase();
- 
     ContentValues values = new ContentValues();
     values.put(KEY_NAME, feed.getName());
     values.put(KEY_URL, feed.getRssUrl());
  
-    return db.update(TABLE_FEEDS, values, KEY_ID + " = ?",
-        new String[] { String.valueOf(feed.getID()) });
+    return db.update(TABLE_FEEDS, values, KEY_ID + " = ?", new String[] { String.valueOf(feed.getID()) });
   }
  
   public void deleteFeed(Feed feed) {
     SQLiteDatabase db = this.getWritableDatabase();
-    db.delete(TABLE_FEEDS, KEY_NAME + " = ?",
-        new String[] { String.valueOf(feed.getName()) });
+    db.delete(TABLE_FEEDS, KEY_NAME + " = ?", new String[] { String.valueOf(feed.getName()) });
     db.close();
   }
  
