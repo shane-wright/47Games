@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.view.MenuItem;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class RssListActivity extends ListActivity {
   public ArrayList titles = new ArrayList();
@@ -28,6 +31,7 @@ public class RssListActivity extends ListActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.rss_list);
     getData();
+    registerForContextMenu(getListView());
     adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titles);
     setListAdapter(adapter);
   }
@@ -51,6 +55,37 @@ public class RssListActivity extends ListActivity {
   }
 
   @Override
+  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    super.onCreateContextMenu(menu, v, menuInfo);
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.layout.context_menu, menu);
+  }
+
+  @Override
+  public boolean onContextItemSelected(MenuItem item) {
+    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    int position = info.position;
+    String title = (String) titles.get(position);
+    String url = (String) urlStrings.get(position);
+    Feed feed = new Feed(title, url);
+    DatabaseHandler db = new DatabaseHandler(this);
+
+    switch (item.getItemId()) {
+      case R.id.delete_rss_feed:
+        db.deleteFeed(feed);
+        db.close();
+        adapter.remove(title);
+        getData();
+        adapter.notifyDataSetChanged();
+        return true;
+      case R.id.rename_rss_feed:
+        return true;
+      default:
+        return super.onContextItemSelected(item);
+    }
+  }
+
+  @Override
   protected void onListItemClick(ListView l, View v, int position, long id) {
     Intent intent = new Intent(this, FeedViewActivity.class);
     intent.putExtra("urlString", urlStrings.get(position).toString());
@@ -61,7 +96,12 @@ public class RssListActivity extends ListActivity {
   private void getData() {
     DatabaseHandler db = new DatabaseHandler(this);
     ArrayList<Feed> feeds = db.getAllFeeds();
+    ArrayList tempTitle = new ArrayList();
+    ArrayList tempUrl = new ArrayList();
+
     for (Feed feed : feeds) {
+      titles.clear();
+      urlStrings.clear();
       titles.add(feed.getName());
       urlStrings.add(feed.getRssUrl());
     }

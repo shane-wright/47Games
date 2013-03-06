@@ -4,9 +4,13 @@
   <item
     android:id="@+id/new_feed_button"
     android:title="@string/new_feed"
-    android:showAsAction="ifRoom|withText" />
+    android:icon="@drawable/new_icon" />
   <item
-    android:id="@+id/edit_feeds_button"
-    android:title="@string/edit_feeds"
-    android:showAsAction="ifRoom|withText"/>
+    android:id="@+id/help_button"
+    android:title="Help"
+    android:icon="@drawable/help_icon" />
+  <item
+    android:id="@+id/info_button"
+    android:title="Info"
+    android:icon="@drawable/info_icon" />
 </menu>

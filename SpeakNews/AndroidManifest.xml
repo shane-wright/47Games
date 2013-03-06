@@ -24,7 +24,8 @@
       android:label="@string/feed_list_activity_label"/>
     <activity 
       android:name="NewFeedActivity"
-      android:label="New RSS"/>
+      android:label="New RSS"
+      android:windowSoftInputMode="adjustPan"/>
   </application>
   <uses-permission android:name="android.permission.INTERNET" /> 
 </manifest> 

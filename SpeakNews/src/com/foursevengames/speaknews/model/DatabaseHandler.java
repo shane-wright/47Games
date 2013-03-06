@@ -104,8 +104,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
  
   public void deleteFeed(Feed feed) {
     SQLiteDatabase db = this.getWritableDatabase();
-    db.delete(TABLE_FEEDS, KEY_ID + " = ?",
-        new String[] { String.valueOf(feed.getID()) });
+    db.delete(TABLE_FEEDS, KEY_NAME + " = ?",
+        new String[] { String.valueOf(feed.getName()) });
     db.close();
   }
  
