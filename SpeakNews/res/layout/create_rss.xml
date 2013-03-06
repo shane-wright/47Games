@@ -40,7 +40,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/edit2_field"
-    android:text="Preview Feed"/>
+    android:text="Preview Feed"
+    android:onClick="previewFeed"/>
   <Button
     android:id="@+id/create_feed_button"
     android:layout_width="wrap_content"
@@ -52,12 +53,14 @@
   <ListView
     android:id="@android:id/list"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    android:layout_below="@id/create_feed_button"/>
   <TextView 
     android:id="@android:id/empty"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
+    android:layout_below="@id/create_feed_button"
     android:gravity="center"
     android:text="RSS Preview"
     android:textSize="20sp"
