@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.EditText;
+import android.view.View;
 
 public class NewFeedActivity extends ListActivity {
   @Override
@@ -28,5 +30,14 @@ public class NewFeedActivity extends ListActivity {
     }
   }
 
-  
+  public void createFeed(View view) {
+    EditText nameView = (EditText) findViewById(R.id.edit1_field);
+    EditText urlView = (EditText) findViewById(R.id.edit2_field);
+    Feed feed = new Feed(nameView.getText().toString(), urlView.getText().toString());
+    DatabaseHandler db = new DatabaseHandler(this);
+    db.addFeed(feed);
+    Intent intent = new Intent(this, RssListActivity.class);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    startActivity(intent);
+  }
 } 

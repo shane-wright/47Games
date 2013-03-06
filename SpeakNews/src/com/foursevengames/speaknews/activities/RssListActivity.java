@@ -20,6 +20,7 @@ import android.view.MenuItem;
 public class RssListActivity extends ListActivity {
   public ArrayList titles = new ArrayList();
   public ArrayList urlStrings = new ArrayList();
+  public ArrayAdapter adapter;
 
   /** Called when the activity is first created. */
   @Override
@@ -27,10 +28,10 @@ public class RssListActivity extends ListActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.rss_list);
     getData();
-    getData2();
-    createRows();
+    adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titles);
+    setListAdapter(adapter);
   }
-  
+
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater inflater = getMenuInflater();
@@ -56,16 +57,13 @@ public class RssListActivity extends ListActivity {
     startActivity(intent);
   }
 
-  private void getData2() {
+  private void getData() {
     DatabaseHandler db = new DatabaseHandler(this);
     ArrayList<Feed> feeds = db.getAllFeeds();
     for (Feed feed : feeds) {
       titles.add(feed.getName());
       urlStrings.add(feed.getRssUrl());
     }
-  }
-
-  private void getData() {
     titles.add("CNN");
     urlStrings.add("http://rss.cnn.com/rss/cnn_topstories.rss");
     titles.add("FOX");
@@ -74,8 +72,4 @@ public class RssListActivity extends ListActivity {
     urlStrings.add("http://www.nba.com/rss/nba_rss.xml");
   }
 
-  private void createRows() {
-    ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, titles);
-    setListAdapter(adapter);
-  }
 }
