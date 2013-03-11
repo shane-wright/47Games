@@ -22,12 +22,38 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.os.AsyncTask;
 import android.content.Context;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
+import java.util.Locale;
 
-public class FeedViewActivity extends ListActivity {
+
+public class FeedViewActivity extends ListActivity implements TextToSpeech.OnInitListener {
   Context context = this;
   ArrayList headlines = new ArrayList();
   ArrayList links = new ArrayList();
   Bundle extras = new Bundle();
+
+  private TextToSpeech tts;
+
+
+
+  @Override
+  public void onInit(int status) {
+  // TODO Auto-generated method stub
+    if (status == TextToSpeech.SUCCESS) {
+    int result = tts.setLanguage(Locale.US);
+    // tts.setPitch(5); // set pitch level
+    // tts.setSpeechRate(2); // set speech speed rate
+    if (result == TextToSpeech.LANG_MISSING_DATA
+      || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+        Log.e("TTS", "Language is not supported");
+          }  } else {
+             Log.e("TTS", "Initilization Failed");
+                }
+
+        }
+
+
 
   /** Called when the activity is first created. */
   @Override
@@ -38,8 +64,13 @@ public class FeedViewActivity extends ListActivity {
     getActionBar().setDisplayHomeAsUpEnabled(true);
     this.setTitle(extras.getString("title"));
     new RssParser().execute(extras.getString("urlString"));
+    tts = new TextToSpeech(this, this);
+
   }
+
+ 
   
+
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
@@ -96,6 +127,11 @@ public class FeedViewActivity extends ListActivity {
       ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, headlines);
       setListAdapter(adapter);
     
+
+    for (String headlines : headlines)  {
+      say(headline); 
+
+      }
     }
   }
 
@@ -113,4 +149,20 @@ public class FeedViewActivity extends ListActivity {
     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
     startActivity(intent);
   }
-}
+    
+
+  private void say() {
+    tts.speak(text);
+    }
+
+
+  @Override
+  public void onDestroy() {
+  // Don't forget to shutdown!
+  if (tts != null) {
+    tts.stop();
+    tts.shutdown();
+    }
+
+    }
+  }
