@@ -29,17 +29,18 @@ import java.util.Locale;
 
 public class FeedViewActivity extends ListActivity implements TextToSpeech.OnInitListener {
   Context context = this;
-  ArrayList headlines = new ArrayList();
+  ArrayList<String> headlines = new ArrayList<String>();
   ArrayList links = new ArrayList();
   Bundle extras = new Bundle();
 
   private TextToSpeech tts;
-
+  
 
 
   @Override
   public void onInit(int status) {
   // TODO Auto-generated method stub
+    Log.d(this.getClass().getCanonicalName(), "onInit");
     if (status == TextToSpeech.SUCCESS) {
     int result = tts.setLanguage(Locale.US);
     // tts.setPitch(5); // set pitch level
@@ -58,6 +59,7 @@ public class FeedViewActivity extends ListActivity implements TextToSpeech.OnIni
   /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
+    Log.d(this.getClass().getCanonicalName(), "Hello from onCreate");
     super.onCreate(savedInstanceState);
     setContentView(R.layout.feed_list);
     extras = getIntent().getExtras();
@@ -123,15 +125,16 @@ public class FeedViewActivity extends ListActivity implements TextToSpeech.OnIni
       return headlines;
     }
 
-    protected void onPostExecute(ArrayList headlines) {
+    protected void onPostExecute(ArrayList<String> headlines) {
       ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, headlines);
       setListAdapter(adapter);
+      Log.d(this.getClass().getCanonicalName(), "onPostExecute/foreach loop");
+
     
+      for (String headline : headlines)  {
+        say(headline);
 
-    for (String headlines : headlines)  {
-      say(headline); 
-
-      }
+      } 
     }
   }
 
@@ -151,13 +154,15 @@ public class FeedViewActivity extends ListActivity implements TextToSpeech.OnIni
   }
     
 
-  private void say() {
-    tts.speak(text);
-    }
+  private void say(String text) {
+    Log.d(this.getClass().getCanonicalName(), "say(String text)");
+    tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+  }
 
 
   @Override
   public void onDestroy() {
+  Log.d(this.getClass().getCanonicalName(), "onDestroy");
   // Don't forget to shutdown!
   if (tts != null) {
     tts.stop();
